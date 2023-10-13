@@ -1,18 +1,30 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+   <div class=" wholeContainer">
+    <HeaderComponent></HeaderComponent>
+    <CalenderComponent class="calender" />
+    <TimeComponent class="mt-5" />
+    <LocationVote class="mt-5" />
+    <PlanSummary class="mt-5" />
+   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+    import HeaderComponent from '@/components/HeaderComponent.vue';
+    import CalenderComponent from '@/components/CalenderComponent.vue';
+    import TimeComponent from '@/components/TimeComponent.vue';
+    import LocationVote from '@/components/LocationVote.vue';
+    import PlanSummary from '@/components/PlanSummary.vue'
+    export default{
+        components:{HeaderComponent, CalenderComponent,TimeComponent,LocationVote,PlanSummary},
+        setup(){
 
-export default {
-  name: 'HomeView',
-  components: {
-    HelloWorld
-  }
-}
+        }
+    }
+
 </script>
+
+<style>
+    .calender{
+        display: none;
+    }
+</style>

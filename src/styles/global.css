@@ -1,0 +1,100 @@
+
+
+:root{
+    --background: #1998D3;
+    --titleColor: #F6CE4B;
+    --textColor: #fff;
+}
+
+/* Title font  */
+@font-face {
+    font-family: 'MyanmarHeadOne';
+    src: url(../assets/fonts/MyanmarHeadOne.ttf);
+}
+
+/* Body Font  */
+@font-face {
+    font-family: 'MyanmarTagu';
+    src: url(../assets/fonts/MyanmarTagu.ttf);
+}
+
+.wholeContainer{
+    width: 500px;
+    background: var(--background);
+
+    margin: auto;
+    justify-content: center;
+    align-items: center;
+
+    padding: 3rem;
+}
+
+/* Header Section  */
+
+.headerContainer{
+    
+}
+
+.headerTitle{
+    display: flex;
+    color: var(--titleColor);
+}
+
+.headerTitle p{
+    font-family: 'MyanmarHeadOne';
+    font-size: 24px;
+    padding-left: 1rem;
+}
+
+.headerBodyText{
+    display: block;
+    color: var(--textColor);
+    margin-top: 2rem;
+    letter-spacing: 2px;
+    /* padding: 1rem; */
+}
+
+.headerBodyText p{
+    font-family: 'MyanmarTagu';
+    font-size: 18px;
+}
+
+
+/* Time Picker Section  */
+
+/* Location Picker Section  */
+
+.placeImage{
+    border-radius: 0.6rem;
+}
+
+.locationInfo{
+    margin-left: 0.6rem;
+}
+
+.locationInfo h5{
+    font-family: 'Outline';
+    font-size: 14px;
+    font-weight: bold;
+    color: var(--titleColor);
+
+    padding: 5px;
+    /* background: var(--textColor); */
+}
+
+.linkBtn{
+    padding: 0.5rem;
+    background: var(--textColor);
+    border-radius: 0.5rem;
+    border: none;
+
+    cursor: pointer;
+}
+
+.linkBtn a{
+    text-decoration: none;
+    color: var(--background);
+    font-family: 'MyanmarTagu';
+}
+
+
