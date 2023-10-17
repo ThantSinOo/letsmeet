@@ -1,5 +1,5 @@
 <template>
-     <div class="headerContainer">
+     <div class="col-12 headerContainer">
         <div class="headerTitle">
             <p>
                 <span>

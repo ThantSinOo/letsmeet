@@ -1,10 +1,10 @@
 <template>
-   <div class=" wholeContainer">
-    <HeaderComponent></HeaderComponent>
-    <CalenderComponent class="calender" />
-    <TimeComponent class="mt-5" />
-    <LocationVote class="mt-5" />
-    <PlanSummary class="mt-5" />
+   <div class="col-12 wholeContainer">
+        <HeaderComponent></HeaderComponent>
+        <CalenderComponent class="calender" />
+        <TimeComponent class="mt-5" />
+        <LocationVote class="mt-5" />
+        <PlanSummary class="mt-5" />
    </div>
 </template>
 
@@ -24,7 +24,5 @@
 </script>
 
 <style>
-    .calender{
-        display: none;
-    }
+   
 </style>
