@@ -14,7 +14,8 @@
             <button 
                 v-for="(time, index) in freeTime"
                 class="timePickerBtn"
-                :class="time.class"
+                 :class="{'active': isActive[time.value]}"
+
                 :key="index"
                 @click="pickTime(time.value)"
                 >
@@ -27,11 +28,12 @@
 </template>
 
 <script>
-    import { ref } from 'vue';
+    import { reactive, ref } from 'vue';
     export default{
         setup(){
+            const isActive = reactive({});
             const selectedFreeTime = ref([]);
-            const isActive = ref(false);
+            // const isActive = ref(false);
             const freeTime = ref([
                 {label: 'မနက်', value:'morning'},
                 {label: 'နေ့လည်', value:'noon'},
@@ -40,13 +42,16 @@
                 {label: 'ညအိပ်ပိုကောင်း', value:'nightstay'},
             ]);
 
-            let pickTime = (value) =>{
-                isActive.value == !isActive.value;
-               if(selectedFreeTime.value.includes(value)){
-                selectedFreeTime.value = selectedFreeTime.value.filter((time) => time !== value);
-               }else{
-                selectedFreeTime.value.push(value);
-               }
+            let pickTime = (data) =>{
+                // console.warn("Clicked Value", time);
+                isActive[data] = !isActive[data];
+                if(selectedFreeTime.value.includes(data)){
+                    selectedFreeTime.value = selectedFreeTime.value.filter((d)=> d !== data);
+                    console.log("The value is already added")
+                }else{
+                    selectedFreeTime.value.push(data); 
+                    console.log("This value is new")
+                }
                console.log("Free Time =>", selectedFreeTime.value)
 
             }
@@ -60,7 +65,7 @@
 <style scoped>
 
 .timePickerBtn{
-    width: 8.5rem;
+    width: 8rem;
     color: var(--titleColor);
     background: var(--textColor);
 

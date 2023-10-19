@@ -28,7 +28,7 @@
          </li>
          </ul>
          <ul class="days">
-           <li v-for="(day, index) in days" :key="index" :class="day.class" @click="handleDateClick(day)">
+           <li v-for="(day, index) in days" :key="index" :class="{'active': day.isActive}" @click="handleDateClick(day)">
              {{ day.label }}
            </li>
          </ul>
@@ -86,10 +86,17 @@
  
      // function for handle click event in days in calender 
      const handleDateClick = (day)=>{
-       day.class = 'active';
-       let selectedDate = day.label;
-       let clickedDateValue = new Date(currentYear.value, currentMonth.value, selectedDate);
-       clickedDaysContainer.value.push(clickedDateValue);
+      day.isActive = !day.isActive;
+      let selectedDate = day.label;
+      let clickedDateValue = new Date(currentYear.value, currentMonth.value, selectedDate);
+
+      if(clickedDaysContainer.value.includes(selectedDate)){
+        clickedDaysContainer.value = clickedDaysContainer.value.filter((i)=> i !== selectedDate);
+      }else{
+        clickedDaysContainer.value.push(clickedDateValue);
+      }
+      
+      
        console.warn("Selected Days =>>>", clickedDaysContainer.value);
  
      }
@@ -229,7 +236,7 @@
 }
 
 .days .active::before{
-    background-color: tomato;
+    background: var(--titleColor);
 }
 
 .days li:not(.active):hover::before{
