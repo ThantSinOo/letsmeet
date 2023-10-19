@@ -42,6 +42,8 @@
  </template>
  <script>
  import { ref } from 'vue'
+ import { db } from '../database/firebase'
+ import { collection, addDoc } from "firebase/firestore";
  export default {
    name: 'HelloWorld',
    setup(){
@@ -58,7 +60,7 @@
      let currentMonth = ref(  new Date().getMonth() )
      let currentYear = ref(new Date().getFullYear())
      let currentDate = ref('');
-     let clickedDaysContainer = ref([]);
+     let selectedDayContainer = ref([]);
      // function to render calender 
      const loadCalender = () =>{
        const firstDayOfMonth = new Date(currentYear.value, currentMonth.value, 1).getDay();
@@ -90,14 +92,18 @@
       let selectedDate = day.label;
       let clickedDateValue = new Date(currentYear.value, currentMonth.value, selectedDate);
 
-      if(clickedDaysContainer.value.includes(selectedDate)){
-        clickedDaysContainer.value = clickedDaysContainer.value.filter((i)=> i !== selectedDate);
+      if(selectedDayContainer.value.includes(selectedDate)){
+        console.log("This Date is Already Selected");
+        selectedDayContainer.value = selectedDayContainer.value.filter((d)=> d !== selectedDate);
+        // selectedDayContainer.value = selectedDayContainer.value.filter((i)=> i !== selectedDate);
       }else{
-        clickedDaysContainer.value.push(clickedDateValue);
+        selectedDayContainer.value.push(selectedDate);
+        console.log("This Date is New");
+        // selectedDayContainer.value.push(clickedDateValue);
       }
       
       
-       console.warn("Selected Days =>>>", clickedDaysContainer.value);
+       console.warn("Selected Days =>>>", selectedDayContainer.value);
  
      }
  
@@ -120,8 +126,18 @@
      loadCalender();
      console.log(`${date.value},${currentMonth.value},${currentYear.value}`)
      
-     let confirmDate = () =>{
-      console.log("Confirm Date ==>>>", clickedDaysContainer.value)
+     let confirmDate = async() =>{
+            try {
+            const docRef = await addDoc(collection(db, "users"), {
+              first: "Ada",
+              last: "Lovelace",
+              born: 1815
+          });
+        console.log("Document written with ID: ", docRef.id);
+      } catch (e) {
+        console.error("Error adding document: ", e);
+      }
+      console.log("Confirm Date ==>>>", selectedDayContainer.value)
      }
 
 
@@ -135,7 +151,7 @@
        currentDate,
        monthsValue,
        changeMonth,
-       clickedDaysContainer,
+       selectedDayContainer,
        handleDateClick,
        confirmDate
      }
