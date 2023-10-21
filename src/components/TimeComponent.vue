@@ -21,13 +21,15 @@
                 >
                 {{ time.label }} 
             </button>
-           
+           <div @click="sendToDb">Time Confirm</div>
             
         </div>
     </div>
 </template>
 
 <script>
+    import db from '../database/firebase'
+    import { collection, addDoc } from 'firebase/firestore';
     import { reactive, ref } from 'vue';
     export default{
         setup(){
@@ -52,12 +54,21 @@
                     selectedFreeTime.value.push(data); 
                     console.log("This value is new")
                 }
-               console.log("Free Time =>", selectedFreeTime.value)
 
+            }
+               console.log("Free Time =>", selectedFreeTime.value, typeof(selectedFreeTime.value));
+
+            let sendToDb = async() =>{
+                try{
+                    await addDoc (collection(db,'freetime'), selectedFreeTime.value);
+                }catch(error){
+                    console.log("Error ",error);
+                }
+                console.log("Send Db work")
             }
 
 
-            return{freeTime, pickTime,isActive}
+            return{freeTime, pickTime,isActive,sendToDb}
         }
     }
 </script>
